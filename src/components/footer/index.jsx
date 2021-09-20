@@ -1,11 +1,11 @@
-import  React from 'react'
+import React from 'react'
 
-const Footer = () => {
+import './footer.scss';
+
+const PageFooter = () => {
     return (
-        <div className='details-page'>
-            This is Footer
-        </div>
+        <footer className='page-footer'>Created by PokeList</footer>
     )
 }
 
-export default Footer
+export default PageFooter

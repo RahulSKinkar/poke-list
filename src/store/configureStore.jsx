@@ -7,7 +7,7 @@ import { listReducer } from '../reducers/list_reducer'
 const configure = (initialState = {}) => {
 
   const rootReducer = combineReducers({
-    poke_list: listReducer
+    poke_list: listReducer,
   });
 
   const store = createStore(

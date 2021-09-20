@@ -1,11 +1,15 @@
-import  React from 'react'
+import React from 'react'
+import Navbar from 'react-bootstrap/Navbar'
+import Container from 'react-bootstrap/Container'
 
-const Header = () => {
+const PageHeader = () => {
     return (
-        <div className='details-page'>
-            This is Header
-        </div>
+        <Navbar bg="dark" variant="dark">
+            <Container fluid>
+                <Navbar.Brand href="/">Poke Gallery</Navbar.Brand>
+            </Container>
+        </Navbar>
     )
 }
 
-export default Header
+export default PageHeader
