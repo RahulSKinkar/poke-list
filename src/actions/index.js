@@ -2,7 +2,6 @@ import { getPokeListApi, getPokemonDetailsApi } from '../apis/api'
 
 //action creators
 const pokeList = (list) => {
-    console.log(list, 'res')
     return {
         type: 'FETCH_LIST',
         list
@@ -16,6 +15,21 @@ const setPokemonDetails = (data) => {
     }
 }
 
+
+export const sortPokemonDetails = (data) => {
+    return {
+        type: 'SORT_DETAILS',
+        data
+    }
+}
+
+export const updatePokeListState = (data) => {
+    return {
+        type: 'UPDATE_STATE_DETAILS',
+        data
+    }
+}
+
 const showError = (error) => {
     return {
         type: 'SHOW_ERROR',
@@ -25,14 +39,18 @@ const showError = (error) => {
 
 //async handlers
 export const getPokeList = (url, limit) => {
-    return (dispatch, getState) => {
-        return getPokeListApi(url, limit)
-            .then((res) => {
-                dispatch(pokeList(res));
+    return async (dispatch, getState) => {
+        try {
+            const pokemonListData = await getPokeListApi(url, limit)
+            dispatch(pokeList(pokemonListData));
+            
+            pokemonListData.results.map( poke_item => {
+                dispatch(getPokemonDetails(poke_item.url));
             })
-            .catch((err) => {
-                dispatch(showError(err));
-            })
+
+        } catch (err) {
+            dispatch(showError(err));
+        }
     }
 }
 
@@ -41,9 +59,18 @@ export const getPokemonDetails = (url) => {
     return (dispatch, getState) => {
         return getPokemonDetailsApi(url)
             .then((res) => {
-                dispatch(setPokemonDetails(res));
+                const resBody = { 
+                    name: res.name,
+                     abilities: res.abilities,
+                      height: res.height,
+                       weight: res.weight, 
+                       id: res.id,
+                       img: res.sprites.other["official-artwork"]["front_default"]
+                    }
+                dispatch(setPokemonDetails(resBody))
             })
             .catch((err) => {
+                console.log(err)
                 dispatch(showError(err));
             })
     }

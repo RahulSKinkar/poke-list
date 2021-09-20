@@ -9,21 +9,21 @@ import './App.scss';
 function App() {
   return (
     <HashRouter>
-        <Header />
-        <div className='page-content'>
-          <Switch>
-            <Route
-              component={GalleryPage}
-              exact
-              path='/'
-            />
-            <Route
-              component={DetailsPage}
-              path='/details'
-            />
-          </Switch>
-        </div>
-        <Footer />
+      <Header />
+      <div className='page-content'>
+        <Switch>
+          <Route
+            component={GalleryPage}
+            exact
+            path='/'
+          />
+          <Route
+            component={DetailsPage}
+            path='/details/:id'
+          />
+        </Switch>
+      </div>
+      <Footer />
     </HashRouter>
   );
 }

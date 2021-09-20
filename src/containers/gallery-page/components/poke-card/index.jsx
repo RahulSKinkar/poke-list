@@ -1,38 +1,27 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
 import { Card, ListGroup, Col } from 'react-bootstrap'
-import { getPokemonDetails } from './../../../../actions'
-// import './gallery.scss';
+import { useHistory } from "react-router-dom";
 
-const PokemonCard = ({ api }) => {
-    const dispatch = useDispatch()
-
-    const id = api.split('/')[6]
-    const pokemon = useSelector(state => state.poke_list.details[id])
-
-    console.log('sdkfjanadsadfsafdasd' , id, pokemon)
-
-    useEffect(() => {
-        dispatch(getPokemonDetails(api))
-    }, [dispatch])
-
-    console.log(pokemon?.abilities)
+const PokemonCard = ({ details }) => {
+    let history = useHistory();
     return (
         <Col xs={6} md={4}>
             <div className='card-page'>
                 <Card>
-                    <Card.Img variant="top" src={pokemon?.sprites?.other["official-artwork"]["front_default"]} />
+                    <Card.Img variant="top" src={details?.img} onClick={() => history.push(`/details/${details.id}`)}/>
                     <Card.Body>
-                        <Card.Title> NAME: {pokemon?.name}</Card.Title>
+                        <Card.Title> NAME: {details?.name}</Card.Title>
                         <Card.Text>
-                            HEIGHT: {pokemon?.height}
+                            HEIGHT: {details?.height}
                         </Card.Text>
                         <Card.Text>
-                            WEIGHT: {pokemon?.weight}
+                            WEIGHT: {details?.weight}
                         </Card.Text>
                         <Card.Title> ABILITIES: </Card.Title>
                         <ListGroup variant="flush">
-                            {pokemon?.abilities.map(({ ability }, index) => <ListGroup.Item key={`${ability?.name}-${index}`}>{ability?.name}</ListGroup.Item>)}
+                            {details?.abilities.map(({ ability }, index) => (<ListGroup.Item key={`${ability?.name}-${index}`}>
+                                {ability?.name}</ListGroup.Item>
+                            ))}
                         </ListGroup>
                     </Card.Body>
                 </Card>
