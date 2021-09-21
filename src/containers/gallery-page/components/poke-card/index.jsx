@@ -13,7 +13,7 @@ const PokemonCard = ({ details }) => {
         <Col xs sm={6} md={4} lg={3}>
             <div className='card-page'>
                 <Card>
-                    <Card.Img variant="top" src={details?.img} onClick={() => history.push(`/details/${details.id}`)} />
+                    <Card.Img variant="top" className='card-image' src={details?.img} onClick={() => history.push(`/details/${details.id}`)} />
                     <Card.Body>
                         <Card.Title> {capitalizeFirstLetter(details?.name)}</Card.Title>
                         <Card.Text>

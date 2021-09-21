@@ -7,6 +7,14 @@
         border-radius: 20px;
         background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
 
+        .card-image {
+            cursor: pointer;
+            &:hover {
+                border: 1px solid #00100e;
+                border-radius: 20px;
+                opacity: 0.7;
+            }
+        }
         .card-text {
             margin-bottom: 5px;
         }
