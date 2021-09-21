@@ -19,8 +19,8 @@ const configure = () => {
   });
 
   const pReducer = persistReducer(persistConfig, rootReducer);
-  const middleware = applyMiddleware(thunk);
-  
+  const middleware = composeWithDevTools(applyMiddleware(thunk))
+
   const store = createStore(
     pReducer,
     middleware,

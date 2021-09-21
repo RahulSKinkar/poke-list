@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 
 import './details.scss'
-import { Card, ListGroup, Button, Container, Carousel } from 'react-bootstrap'
+import { Card, Button, Container, Carousel } from 'react-bootstrap'
 
 const DetailsPage = () => {
     const { id } = useParams()
@@ -32,6 +32,7 @@ const DetailsPage = () => {
                                     <img
                                         className="d-block w-100"
                                         src={imgUrl}
+                                        alt='Pokemon Images'
                                     />
                                 </Carousel.Item>
                             ))

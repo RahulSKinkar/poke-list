@@ -1,8 +1,7 @@
 import axios from 'axios'
 
 // Get Poke List
-export const getPokeListApi = (url, limit = '10') => {
-    const requestUrl = url || `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=0`;
+export const getPokeListApi = (requestUrl) => {
     return getRequest(requestUrl)
 }
 

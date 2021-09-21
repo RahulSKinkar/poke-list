@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, ListGroup, Col } from 'react-bootstrap'
+import { Card, Col } from 'react-bootstrap'
 import { useHistory } from "react-router-dom";
 
 import './poke-card.scss'

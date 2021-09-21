@@ -30,6 +30,20 @@ export const updatePokeListState = (data) => {
     }
 }
 
+export const updatePokeApi = (api) => {
+    return {
+        type: 'UPDATE_POKE_API',
+        api
+    }
+}
+
+export const updateCardNumDatails = (data) => {
+    return {
+        type: 'UPDATE_CARD_NUM_DETAILS',
+        data
+    }
+}
+
 const showError = (error) => {
     return {
         type: 'SHOW_ERROR',
@@ -38,11 +52,13 @@ const showError = (error) => {
 }
 
 //async handlers
-export const getPokeList = (url, limit) => {
+export const getPokeList = (url, limit = '10') => {
     return async (dispatch, getState) => {
         try {
-            const pokemonListData = await getPokeListApi(url, limit)
+            const requestUrl = url || `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=0`;
+            const pokemonListData = await getPokeListApi(requestUrl)
             dispatch(pokeList(pokemonListData));
+            dispatch(updatePokeApi(requestUrl));
 
             pokemonListData.results.map(poke_item => {
                 dispatch(getPokemonDetails(poke_item.url));
