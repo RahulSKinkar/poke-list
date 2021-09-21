@@ -2,27 +2,39 @@ import React from 'react'
 import { Card, ListGroup, Col } from 'react-bootstrap'
 import { useHistory } from "react-router-dom";
 
+import './poke-card.scss'
+
 const PokemonCard = ({ details }) => {
     let history = useHistory();
+
+    const capitalizeFirstLetter = string => string.charAt(0).toUpperCase() + string.slice(1)
+
     return (
-        <Col xs={6} md={4}>
+        <Col xs sm={6} md={4} lg={3}>
             <div className='card-page'>
                 <Card>
-                    <Card.Img variant="top" src={details?.img} onClick={() => history.push(`/details/${details.id}`)}/>
+                    <Card.Img variant="top" src={details?.img} onClick={() => history.push(`/details/${details.id}`)} />
                     <Card.Body>
-                        <Card.Title> NAME: {details?.name}</Card.Title>
+                        <Card.Title> {capitalizeFirstLetter(details?.name)}</Card.Title>
                         <Card.Text>
-                            HEIGHT: {details?.height}
+                            Height: {details?.height}
                         </Card.Text>
                         <Card.Text>
-                            WEIGHT: {details?.weight}
+                            Weight: {details?.weight}
                         </Card.Text>
-                        <Card.Title> ABILITIES: </Card.Title>
-                        <ListGroup variant="flush">
-                            {details?.abilities.map(({ ability }, index) => (<ListGroup.Item key={`${ability?.name}-${index}`}>
-                                {ability?.name}</ListGroup.Item>
-                            ))}
-                        </ListGroup>
+                    </Card.Body>
+                    <Card.Body className="text-muted">
+                        <Card.Title>Abilities</Card.Title>
+                        <div>
+                            {
+                                details?.abilities.map(
+                                    ({ ability }, index) => (
+                                        <span className='chips' key={`${ability?.name}-${index}`}>
+                                            {capitalizeFirstLetter(ability?.name)}
+                                        </span>
+                                    ))
+                            }
+                        </div>
                     </Card.Body>
                 </Card>
             </div>

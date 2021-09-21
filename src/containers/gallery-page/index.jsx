@@ -13,7 +13,7 @@ import './gallery.scss';
 const GalleryPage = () => {
     const dispatch = useDispatch()
     const pokeListState = useSelector(state => state?.poke_list?.list)
-     
+
     useEffect(() => {
         dispatch(getPokeList())
     }, [dispatch])

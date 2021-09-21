@@ -43,8 +43,8 @@ export const getPokeList = (url, limit) => {
         try {
             const pokemonListData = await getPokeListApi(url, limit)
             dispatch(pokeList(pokemonListData));
-            
-            pokemonListData.results.map( poke_item => {
+
+            pokemonListData.results.map(poke_item => {
                 dispatch(getPokemonDetails(poke_item.url));
             })
 
@@ -59,14 +59,19 @@ export const getPokemonDetails = (url) => {
     return (dispatch, getState) => {
         return getPokemonDetailsApi(url)
             .then((res) => {
-                const resBody = { 
+
+                const resBody = {
                     name: res.name,
-                     abilities: res.abilities,
-                      height: res.height,
-                       weight: res.weight, 
-                       id: res.id,
-                       img: res.sprites.other["official-artwork"]["front_default"]
-                    }
+                    abilities: res.abilities,
+                    height: res.height,
+                    weight: res.weight,
+                    id: res.id,
+                    species: res.species,
+                    moves: res.moves,
+                    base_experience: res.base_experience,
+                    sprites: res.sprites,
+                    img: res.sprites.other["official-artwork"]["front_default"]
+                }
                 dispatch(setPokemonDetails(resBody))
             })
             .catch((err) => {

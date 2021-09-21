@@ -39,7 +39,7 @@ const PageFilter = () => {
                 sortedList.sort((a, b) => a.height - b.height)
                 return dispatch(sortPokemonDetails(sortedList))
             case 'filter':
-                let filteredList = filterDetails.filter((item, key) => item?.name?.includes(value))
+                let filteredList = filterDetails.filter(item => item?.name?.toUpperCase().includes(value.toUpperCase()))
                 return dispatch(sortPokemonDetails(filteredList))
 
         }
@@ -63,7 +63,7 @@ const PageFilter = () => {
             <Card bg='info'>
                 <Card.Body>
                     <Row>
-                        <Col xs lg="2">
+                        <Col xs={12} md={6} lg="2">
                             <Form.Select aria-label="Floating label select example" onChange={cardNumHandler} >
                                 <option disabled defaultValue>Cards per page</option>
                                 <option value="10">10</option>
@@ -71,7 +71,7 @@ const PageFilter = () => {
                                 <option value="50">50</option>
                             </Form.Select>
                         </Col>
-                        <Col xs lg="2">
+                        <Col xs={12} md={6}  lg="2">
                             <Form.Select aria-label="Floating label select example" onChange={sortItemHandler} >
                                 <option defaultValue>Sort Items</option>
                                 <option value="name">Name</option>
@@ -79,10 +79,10 @@ const PageFilter = () => {
                                 <option value="weight">weight</option>
                             </Form.Select>
                         </Col>
-                        <Col xs>
+                        <Col xs={12} md lg>
                             <Form.Control id="searchPokemonFormInput" placeholder="Search Pokemon" ref={searchInputRef}/>
                         </Col>
-                        <Col xs lg="1">
+                        <Col xs={12} md={3}  lg="1">
                             <Button type="submit" onClick={searchHandler} >Search</Button>
                         </Col>
                     </Row>
